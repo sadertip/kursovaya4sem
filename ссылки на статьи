@@ -1,1 +1,11 @@
-https://www.researchgate.net/publication/220366366_Simple_Algorithms_for_Gilmore-Gomory's_Traveling_Salesman_and_Related_Problems            |Traveling Salesman Problem Cutoff Method (Gomori Algorithm)
+https://www.researchgate.net/publication/220366366_Simple_Algorithms_for_Gilmore-Gomory's_Traveling_Salesman_and_Related_Problems 
+|Traveling Salesman Problem Cutoff Method (Gomori Algorithm)|
+|задача не так сформулирована, использется не евклидова метрика и задача другая решается|
+
+https://hal.science/hal-04348868/document
+|Different approaches to solve Traveling Salesman Problem|
+есть про hill climbing  но про первый алоритм нет
+
+https://sci-hub.ru/https://doi.org/10.1287/opre.2.4.393
+Solution of a Large-Scale Traveling-Salesman Problem
+вроде бы применение метода отсечений для TSP но не вчитывался 
