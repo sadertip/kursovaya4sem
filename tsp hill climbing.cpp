@@ -6,14 +6,14 @@
 #include <ctime>
 #include <algorithm>
 #include <random>
-#include <numeric>  // Необходим для std::iota
+#include <numeric>  // РќРµРѕР±С…РѕРґРёРј РґР»СЏ std::iota
 
 void RandomfillMatrix(std::vector<std::vector<int>>& matrix) {
     int N = matrix.size();
     for (int i = 0; i < N; ++i) {
         for (int j = i + 1; j < N; ++j) {
-            matrix[i][j] = rand() % (50 - 1 + 1) + 2;  // Верхний треугольник
-            matrix[j][i] = matrix[i][j];                    // Нижний треугольник (симметрия)
+            matrix[i][j] = rand() % (50 - 1 + 1) + 2;  // Р’РµСЂС…РЅРёР№ С‚СЂРµСѓРіРѕР»СЊРЅРёРє
+            matrix[j][i] = matrix[i][j];                    // РќРёР¶РЅРёР№ С‚СЂРµСѓРіРѕР»СЊРЅРёРє (СЃРёРјРјРµС‚СЂРёСЏ)
         }
         matrix[i][i] = 0; 
     }
@@ -34,7 +34,7 @@ void FillMatrix(std::vector<std::vector<int>>& matrix) {
 
             }
             matrix[i][j] = r;
-            matrix[j][i] = matrix[i][j];  // симметрия
+            matrix[j][i] = matrix[i][j];  // СЃРёРјРјРµС‚СЂРёСЏ
         }
     }
 }
@@ -72,10 +72,10 @@ void twoOptSwap(std::vector<int>& path, int i, int k) {
 std::vector<int> createVector(int n) {
     std::vector<int> vec(n);
 
-    // Заполняем числами от 0 до n-1
+    // Р—Р°РїРѕР»РЅСЏРµРј С‡РёСЃР»Р°РјРё РѕС‚ 0 РґРѕ n-1
     std::iota(vec.begin(), vec.end(), 0);
 
-    // Перемешиваем
+    // РџРµСЂРµРјРµС€РёРІР°РµРј
     std::shuffle(vec.begin(), vec.end(), std::mt19937{ std::random_device{}() });
 
     return vec;
@@ -90,14 +90,14 @@ std::vector<int> hillClimbingTSP(int max_iterations, std::vector<std::vector<int
         bool improved = false;
         std::vector<int> bestNeighbor = currentPath;
         int bestNeighborDistance = currentDistance;
-        // Перебираем всех соседей (Swap двух городов)
+        // РџРµСЂРµР±РёСЂР°РµРј РІСЃРµС… СЃРѕСЃРµРґРµР№ (Swap РґРІСѓС… РіРѕСЂРѕРґРѕРІ)
         for (int i = 1; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
                 std::vector<int> neighbor = currentPath;
-                std::swap(neighbor[i], neighbor[j]); // Меняем два города
+                std::swap(neighbor[i], neighbor[j]); // РњРµРЅСЏРµРј РґРІР° РіРѕСЂРѕРґР°
                 int neighborDistance = LenCount(neighbor,matrix);
 
-                // Если нашли лучшее решение, переходим на него
+                // Р•СЃР»Рё РЅР°С€Р»Рё Р»СѓС‡С€РµРµ СЂРµС€РµРЅРёРµ, РїРµСЂРµС…РѕРґРёРј РЅР° РЅРµРіРѕ
                 if (neighborDistance < bestNeighborDistance) {
                     bestNeighbor = neighbor;
                     bestNeighborDistance = neighborDistance;
@@ -105,7 +105,7 @@ std::vector<int> hillClimbingTSP(int max_iterations, std::vector<std::vector<int
                 }
             }
         }
-        // Проверяем всех соседей через 2-opt
+        // РџСЂРѕРІРµСЂСЏРµРј РІСЃРµС… СЃРѕСЃРµРґРµР№ С‡РµСЂРµР· 2-opt
         for (int i = 1; i < n - 1; i++) {
             for (int j = i + 1; j < n; j++) {
                 std::vector<int> neighbor = currentPath;
@@ -120,7 +120,7 @@ std::vector<int> hillClimbingTSP(int max_iterations, std::vector<std::vector<int
             }
         }
 
-        // Если нашли улучшение, переходим к лучшему соседу
+        // Р•СЃР»Рё РЅР°С€Р»Рё СѓР»СѓС‡С€РµРЅРёРµ, РїРµСЂРµС…РѕРґРёРј Рє Р»СѓС‡С€РµРјСѓ СЃРѕСЃРµРґСѓ
         if (improved) {
             currentPath = bestNeighbor;
             currentDistance = bestNeighborDistance;
@@ -128,7 +128,7 @@ std::vector<int> hillClimbingTSP(int max_iterations, std::vector<std::vector<int
             std::cout << std::endl << "score " << bestNeighborDistance << std::endl;
         }
         else {
-            break; // Локальный оптимум достигнут
+            break; // Р›РѕРєР°Р»СЊРЅС‹Р№ РѕРїС‚РёРјСѓРј РґРѕСЃС‚РёРіРЅСѓС‚
         }
     }
 
@@ -144,7 +144,7 @@ int main()
     std::cin >> n;
     std::vector<std::vector<int>> roads(n, std::vector<int>(n));
     
-    FillMatrix(roads); //нет проверки на неравенство треугольника, нужно?
+    FillMatrix(roads); //РЅРµС‚ РїСЂРѕРІРµСЂРєРё РЅР° РЅРµСЂР°РІРµРЅСЃС‚РІРѕ С‚СЂРµСѓРіРѕР»СЊРЅРёРєР°, РЅСѓР¶РЅРѕ?
     PrintMatrix(roads);
 
     std::vector<int> route = hillClimbingTSP(100, roads);
